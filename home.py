@@ -78,8 +78,9 @@ with left:
             )
             st.session_state['start_datetime'] = datetime.combine(start_date, start_time)
         with speed_column:
-            st.session_state['speed_knots'] = st.number_input(
+            st.number_input(
                 'speed (knots)',
+                key = 'speed_knots',
                 value = st.session_state['speed_knots'],
                 step = 1.0
             )
