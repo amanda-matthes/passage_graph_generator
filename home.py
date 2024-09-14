@@ -203,8 +203,7 @@ with left:
                 step = 1.0,
                 min_value = 0.0,
                 max_value = st.session_state['total_route_distance_nautical_miles'],
-                key = 'constraint{}_end_distance'.format(i),
-                value = start_distance + constraint_default_distance
+                key = 'constraint{}_end_distance'.format(i)
             )
 
         st.session_state['waterspace_constraint_data'][i] = {
