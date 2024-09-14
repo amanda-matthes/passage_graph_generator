@@ -412,7 +412,7 @@ with right:
 
     # add stuff
     plt.annotate(
-        '🙂',
+        '😁',
         xy = (0.1, 0.1),
         xycoords = 'axes fraction',
         fontname='Segoe UI Emoji',
