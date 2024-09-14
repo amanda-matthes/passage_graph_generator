@@ -46,7 +46,7 @@ with left:
             )
             st.session_state['start_datetime'] = datetime.combine(start_date, start_time)
         with end_column:
-            default_duration = timedelta(hours = 12)
+            default_duration = timedelta(hours = 24*2)
 
             end_date = st.date_input(
                 'end date',
