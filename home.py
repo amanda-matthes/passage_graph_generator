@@ -13,7 +13,7 @@ if 'markers' not in st.session_state:
     st.session_state['markers'] = []
 
 
-left, right = st.columns(2)
+left, middle, right = st.columns(3)
 
 with left:
     #################################### user input
@@ -217,8 +217,10 @@ with left:
             'end_distance': end_distance
         }
 
-    # current time and position
-    st.divider()
+
+
+with middle:
+    # add markers
     st.write('## add marker')
     marker_date = st.date_input('date', min_value=st.session_state['start_datetime'], max_value=st.session_state['end_datetime'])
     marker_time = st.time_input('time')
