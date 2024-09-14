@@ -216,9 +216,14 @@ with left:
     # current time and position
     st.divider()
     st.write('## add marker')
-    marker_date = st.date_input('date')
+    marker_date = st.date_input('date', min_value=st.session_state['start_datetime'], max_value=st.session_state['end_datetime'])
     marker_time = st.time_input('time')
-    marker_distance = st.number_input('distance to end of route', step = 1.0)
+    marker_distance = st.number_input(
+        'distance to end of route',
+        step        = 1.0,
+        min_value   = 0.0,
+        max_value   = st.session_state['total_route_distance_nautical_miles']
+    )
 
     add_marker = st.button('add marker')
     if add_marker:
