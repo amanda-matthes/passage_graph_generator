@@ -96,7 +96,7 @@ with left:
 
     # zero PIM sections
     st.divider()
-    st.write('## zero PIM sections')
+    st.write('## zero PIM sections (not implemented yet)')
 
     st.number_input(
         'number of zero PIM sections',
@@ -124,14 +124,17 @@ with left:
             )
             zone_start = datetime.combine(start_date, start_time)
         with end_column:
+            zero_PIM_default_duration = timedelta(hours = 1)
             end_date = st.date_input(
                 'end date',
-                key = 'zeroPIM{}_end_date'.format(i)
+                key = 'zeroPIM{}_end_date'.format(i),
+                value = zone_start +  zero_PIM_default_duration
             )
             end_time = st.time_input(
                 'end time',
                 step = timedelta(hours = 0.5),
-                key = 'zeroPIM{}_end_time'.format(i)
+                key = 'zeroPIM{}_end_time'.format(i),
+                value = zone_start + zero_PIM_default_duration
             )
             zone_end = datetime.combine(end_date, end_time)
 
@@ -264,7 +267,8 @@ with right:
             [zone['start'], zone['end']],
             [total_route_distance_nautical_miles, total_route_distance_nautical_miles],
             color = 'green',
-            linewidth = 5,
+            marker = 'x',
+            linewidth = 1,
             # label = 'zero PIM zone {}'.format(index)
         )
 
