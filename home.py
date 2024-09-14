@@ -126,7 +126,7 @@ with left:
             )
             zone_start = datetime.combine(start_date, start_time)
         with end_column:
-            zero_PIM_default_duration = timedelta(hours = 1)
+            zero_PIM_default_duration = timedelta(hours = 4)
             end_date = st.date_input(
                 'end date',
                 key = 'zeroPIM{}_end_date'.format(i),
