@@ -351,6 +351,8 @@ with right:
     plt.legend(loc = 'center left', bbox_to_anchor = (1, 0.5))
 
     # format
+    plt.grid()
+
     x_pad = timedelta(hours = 1)
     plt.xlim(start_datetime - x_pad, end_datetime + x_pad)
 
