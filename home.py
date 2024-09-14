@@ -280,7 +280,7 @@ with right:
     for index, zone in enumerate(st.session_state['zero_PIM_data']):
         plt.plot(
             [zone['start'], zone['end']],
-            [total_route_distance_nautical_miles, total_route_distance_nautical_miles],
+            [total_route_distance_nautical_miles/2, total_route_distance_nautical_miles/2],
             color = 'green',
             marker = 'x',
             linewidth = 1,
