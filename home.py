@@ -379,11 +379,16 @@ with right:
 
     if generate:
 
-        filename = datetime.strftime(start_datetime, '%Y-%m-%d') + '_to_' + datetime.strftime(end_datetime, '%Y-%m-%d %H:%M') + '.png'
+        filename = datetime.strftime(start_datetime, '%Y-%m-%d') + '_to_' + datetime.strftime(end_datetime, '%Y-%m-%d %H:%M')
 
-        plt.savefig(filename)
+        plt.savefig(filename + '.png', dpi = 600, bbox_inches = 'tight')
+        plt.savefig(filename + '.pdf', bbox_inches = 'tight')
         st.write('generated ', filename)
 
-        st.download_button('download plot', 'plot.png', filename, 'image/png')
+        with open(filename + '.png', 'rb') as f:
+            st.download_button('download as png', f, filename + '.png', mime = 'image/png')
+
+        with open(filename + '.pdf', 'rb') as f:
+            st.download_button('download as pdf', f, filename + '.pdf')
 
 
