@@ -59,6 +59,7 @@ with left:
             )
             st.session_state['end_datetime'] = datetime.combine(end_date, end_time)
 
+        # calculate total duration and speed
         st.session_state['total_duration'] = st.session_state['end_datetime'] - st.session_state['start_datetime']
         total_hours = st.session_state['total_duration'].total_seconds() /(60 * 60)
         if total_hours > 0:
@@ -84,6 +85,13 @@ with left:
                 value = st.session_state['speed_knots'],
                 step = 1.0
             )
+        # calculate total duration and end time
+        if st.session_state['speed_knots'] > 0:
+            total_hours = st.session_state['total_route_distance_nautical_miles'] / st.session_state['speed_knots']
+        else:
+            total_hours = 0.0
+        st.session_state['total_duration'] = timedelta(hours = total_hours)
+        st.session_state['end_datetime'] = st.session_state['start_datetime'] + st.session_state['total_duration']
 
 
     # zero PIM sections
