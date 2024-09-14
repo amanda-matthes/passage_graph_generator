@@ -363,7 +363,13 @@ with right:
     y_pad = 0.5
     plt.ylim(0 - y_pad, total_route_distance_nautical_miles + y_pad)
 
-    ax.xaxis.set_major_locator(mdates.HourLocator(interval = 1))
+    st.number_input(
+        'tick every x hours',
+        key = 'tick_interval',
+        value = 4,
+        step = 1
+    )
+    ax.xaxis.set_major_locator(mdates.HourLocator(interval = st.session_state['tick_interval']))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m %H:%M'))
     plt.xticks(rotation = 90)
 
