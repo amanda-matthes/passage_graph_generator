@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.patches as patches
 
+st.set_page_config(layout="wide")
+
 #################################### init
 if 'markers' not in st.session_state:
     st.session_state['markers'] = []
