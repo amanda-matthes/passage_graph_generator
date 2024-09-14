@@ -173,14 +173,17 @@ with left:
             )
             constraint_start_time = datetime.combine(start_date, start_time)
         with end_time_column:
+            constraint_default_duration = timedelta(hours = 1)
             end_date = st.date_input(
                 'end date',
-                key = 'constraint{}_end_date'.format(i)
+                key = 'constraint{}_end_date'.format(i),
+                value = constraint_start_time + constraint_default_duration
             )
             end_time = st.time_input(
                 'end time',
                 step = timedelta(hours = 0.5),
-                key = 'constraint{}_end_time'.format(i)
+                key = 'constraint{}_end_time'.format(i),
+                value = constraint_start_time + constraint_default_duration
             )
             constraint_end_time = datetime.combine(end_date, end_time)
 
@@ -192,10 +195,12 @@ with left:
                 key = 'constraint{}_start_distance'.format(i)
             )
         with end_distance_column:
+            constraint_default_distance = 1.0
             end_distance = st.number_input(
                 'end distance',
                 step = 1.0,
-                key = 'constraint{}_end_distance'.format(i)
+                key = 'constraint{}_end_distance'.format(i),
+                value = start_distance + constraint_default_distance
             )
 
         st.session_state['waterspace_constraint_data'][i] = {
