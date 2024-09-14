@@ -238,6 +238,62 @@ with middle:
             'distance': marker_distance
         })
 
+    # add notes
+    st.divider()
+    st.write('## annotate')
+    st.number_input(
+        'number of notes',
+        key = 'number_of_notes',
+        value = 0,
+        step = 1,
+        min_value = 0
+    )
+
+    st.session_state['notes'] = [{} for i in range(st.session_state['number_of_notes'])]
+
+    for i in range(st.session_state['number_of_notes']):
+        st.write('### note {}'.format(i + 1))
+
+        start_column, end_column = st.columns(2)
+        with start_column:
+            start_date = st.date_input(
+                'start date',
+                key = 'note{}_start_date'.format(i),
+                value = st.session_state['start_datetime'],
+            )
+            start_time = st.time_input(
+                'start time',
+                step = timedelta(hours = 0.5),
+                key = 'note{}_start_time'.format(i),
+                value = st.session_state['start_datetime']
+            )
+            note_start = datetime.combine(start_date, start_time)
+        with end_column:
+            note_default_duration = timedelta(hours = 6)
+            end_date = st.date_input(
+                'end date',
+                key = 'note{}_end_date'.format(i),
+                value = note_start +  note_default_duration
+            )
+            end_time = st.time_input(
+                'end time',
+                step = timedelta(hours = 0.5),
+                key = 'note{}_end_time'.format(i),
+                value = note_start + note_default_duration
+            )
+            note_end = datetime.combine(end_date, end_time)
+
+        text = st.text_input(
+            'note text',
+            key = 'note{}_text'.format(i),
+        )
+        st.session_state['notes'][i] = {
+            'start': note_start,
+            'end': note_end,
+            'text': text
+        }
+
+
 with right:
     #################################### overview
     st.write('## overview')
@@ -263,8 +319,8 @@ with right:
     }
     st.table(overview)
 
-
     #################################### plot
+    st.divider()
     st.write('## plot')
     figure = plt.figure()
     ax = plt.gca()
@@ -303,7 +359,7 @@ with right:
         ))
 
 
-    # current position plotting
+    # add markers
     annotate = st.checkbox('annotate markers')
     for marker in st.session_state['markers']:
         plt.plot(
@@ -325,6 +381,34 @@ with right:
                 fontsize = 8,
                 arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0')
             )
+
+    # add range notes
+
+    for note in st.session_state['notes']:
+        note_start = note['start']
+        note_end = note['end']
+        note_width = note_end - note_start
+        note_centre = note_start + note_width/2
+        relative_height = 35
+        height_in_data_coordinates = total_route_distance_nautical_miles * relative_height / 100
+
+        text = plt.text(
+            x = mdates.date2num(note_centre),
+            y = 0 - height_in_data_coordinates,
+            s = note['text'],
+            ha = 'center',
+            bbox = dict(facecolor = 'white', alpha = 0.5),
+            wrap = True
+        )
+
+        ax.add_patch(patches.Rectangle(
+            xy = (note_start, 0 - height_in_data_coordinates),
+            width = note_width,
+            height = height_in_data_coordinates,
+            color = 'grey',
+            alpha = 0.5,
+            clip_on = False
+        ))
 
     # add stuff
     plt.annotate(
@@ -352,7 +436,6 @@ with right:
     # plt.axvline(end_datetime, color = 'black', linewidth = 1, alpha = alpha)
 
     plt.title('passage graph')
-    plt.xlabel('time')
     plt.ylabel('distance to go (nautical miles)')
     plt.legend(loc = 'center left', bbox_to_anchor = (1, 0.5))
 
