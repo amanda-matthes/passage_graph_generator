@@ -323,6 +323,11 @@ with right:
         va = 'top'
     )
 
+    alpha = 0.3
+    plt.axhline(0, color = 'black', linewidth = 1, alpha = alpha)
+    plt.axvline(start_datetime, color = 'black', linewidth = 1, alpha = alpha)
+    plt.axvline(end_datetime, color = 'black', linewidth = 1, alpha = alpha)
+
     plt.title('passage graph')
     plt.xlabel('time')
     plt.ylabel('distance to go (nautical miles)')
