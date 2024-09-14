@@ -194,6 +194,7 @@ with left:
             start_distance = st.number_input(
                 'start distance',
                 step = 1.0,
+                value = 0.0,
                 min_value = 0.0,
                 max_value = st.session_state['total_route_distance_nautical_miles'],
                 key = 'constraint{}_start_distance'.format(i)
@@ -203,6 +204,7 @@ with left:
             end_distance = st.number_input(
                 'end distance',
                 step = 1.0,
+                value = 10.0,
                 min_value = 0.0,
                 max_value = st.session_state['total_route_distance_nautical_miles'],
                 key = 'constraint{}_end_distance'.format(i)
