@@ -23,7 +23,7 @@ with left:
     st.number_input(
         'total route distance (nautical miles)',
         key = 'total_route_distance_nautical_miles',
-        value = 15.0,
+        value = 100.0,
         step = 1.0
     )
 
