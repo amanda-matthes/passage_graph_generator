@@ -9,6 +9,7 @@ st.set_page_config(layout="wide")
 
 #################################### init
 if 'markers' not in st.session_state:
+    st.session_state['start_datetime'] = datetime.now()
     st.session_state['markers'] = []
 
 
@@ -38,24 +39,23 @@ with left:
         with start_column:
             start_date = st.date_input(
                 'start date',
-                value = datetime.now().date()
             )
             start_time = st.time_input(
                 'start time',
                 step = timedelta(hours = 1),
-                value = datetime.now().time()
             )
             st.session_state['start_datetime'] = datetime.combine(start_date, start_time)
         with end_column:
             default_duration = timedelta(hours = 12)
+
             end_date = st.date_input(
                 'end date',
-                value = st.session_state['start_datetime'] + default_duration
+                value = datetime.now() + default_duration
             )
             end_time = st.time_input(
                 'end time',
                 step = timedelta(hours = 1),
-                value = st.session_state['start_datetime'] + default_duration
+                value = datetime.now() + default_duration
             )
             st.session_state['end_datetime'] = datetime.combine(end_date, end_time)
 
