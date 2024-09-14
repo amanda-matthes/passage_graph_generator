@@ -334,6 +334,12 @@ with right:
     plt.legend(loc = 'center left', bbox_to_anchor = (1, 0.5))
 
     # format
+    x_pad = timedelta(hours = 1)
+    plt.xlim(start_datetime - x_pad, end_datetime + x_pad)
+
+    y_pad = 0.5
+    plt.ylim(0 - y_pad, total_route_distance_nautical_miles + y_pad)
+
     ax.xaxis.set_major_locator(mdates.HourLocator(interval = 1))
     ax.xaxis.set_major_formatter(mdates.DateFormatter('%d.%m %H:%M'))
     plt.xticks(rotation = 90)
