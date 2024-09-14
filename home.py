@@ -175,7 +175,7 @@ with left:
             )
             constraint_start_time = datetime.combine(start_date, start_time)
         with end_time_column:
-            constraint_default_duration = timedelta(hours = 1)
+            constraint_default_duration = timedelta(hours = 5)
             end_date = st.date_input(
                 'end date',
                 key = 'constraint{}_end_date'.format(i),
