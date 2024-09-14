@@ -82,8 +82,8 @@ with left:
             st.number_input(
                 'speed (knots)',
                 key = 'speed_knots',
-                value = st.session_state['speed_knots'],
-                step = 1.0
+                step = 1.0,
+                value = 7.0
             )
         # calculate total duration and end time
         if st.session_state['speed_knots'] > 0:
