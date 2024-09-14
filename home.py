@@ -115,12 +115,14 @@ with left:
         with start_column:
             start_date = st.date_input(
                 'start date',
-                key = 'zeroPIM{}_start_date'.format(i)
+                key = 'zeroPIM{}_start_date'.format(i),
+                value = st.session_state['start_datetime'],
             )
             start_time = st.time_input(
                 'start time',
                 step = timedelta(hours = 0.5),
-                key = 'zeroPIM{}_start_time'.format(i)
+                key = 'zeroPIM{}_start_time'.format(i),
+                value = st.session_state['start_datetime']
             )
             zone_start = datetime.combine(start_date, start_time)
         with end_column:
